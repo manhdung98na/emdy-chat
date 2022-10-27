@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "793819999155",
+    "project_id": "emdy-chat",
+    "storage_bucket": "emdy-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793819999155:android:2fd091b9cf9ff6166af9c6",
+        "android_client_info": {
+          "package_name": "com.example.chatapp_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793819999155-p6lvn7qtsf7rkr5bo5r49ja4v6rg2ve6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ0yqtjX7ur6K3fI9UX_ST88eu7Zrfi5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793819999155-p6lvn7qtsf7rkr5bo5r49ja4v6rg2ve6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "793819999155-2j2l5lpjhtlhsab9phj20df1f92sv00o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatappFirebase"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793819999155:android:53a0bfbf844c35716af9c6",
+        "android_client_info": {
+          "package_name": "com.example.emdy_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793819999155-p6lvn7qtsf7rkr5bo5r49ja4v6rg2ve6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ0yqtjX7ur6K3fI9UX_ST88eu7Zrfi5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793819999155-p6lvn7qtsf7rkr5bo5r49ja4v6rg2ve6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "793819999155-2j2l5lpjhtlhsab9phj20df1f92sv00o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatappFirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
