@@ -3,6 +3,7 @@ import 'package:emdy_chat/configure/route.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
+import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/modal/chat.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/error_media.dart';
@@ -35,11 +36,14 @@ class HomePageChatItem extends StatelessWidget {
         textOverflow: TextOverflow.ellipsis,
       ),
       subtitle: AppText(
-        text: '${chat.recentActorName} ${chat.recentAction}',
+        text: '$name ${chat.recentAction}',
         style: StyleConfig.hintTextStyle,
       ),
     );
   }
+
+  String get name =>
+      chat.recentActorId == UserManager.uid ? 'You' : chat.recentActorName;
 
   Widget get chatAvatar {
     if (HomePageController.instance.avatar.containsKey(chat.theOppositeId) ||
