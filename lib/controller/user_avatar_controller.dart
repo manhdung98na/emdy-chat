@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emdy_chat/manager/file_manager.dart';
+import 'package:emdy_chat/manager/firebase_manager.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:file_picker/file_picker.dart';
@@ -26,6 +28,12 @@ class UserAvatarController extends ChangeNotifier {
         UserManager.currentUser!.avatar = null;
         notifyListeners();
       }
+      FirebaseFirestore.instance
+          .collection(FirebaseManager.userCollection)
+          .doc(UserManager.uid)
+          .update({'hasAvatar': false}).then((_) {
+        UserManager.currentUser!.hasAvatar = false;
+      });
     }).whenComplete(() => Navigator.pop(context));
   }
 
@@ -45,6 +53,14 @@ class UserAvatarController extends ChangeNotifier {
       if (result) {
         UserManager.currentUser!.avatar = compressedImage;
         notifyListeners();
+      }
+      if (!UserManager.currentUser!.hasAvatar) {
+        FirebaseFirestore.instance
+            .collection(FirebaseManager.userCollection)
+            .doc(UserManager.uid)
+            .update({'hasAvatar': true}).then((_) {
+          UserManager.currentUser!.hasAvatar = true;
+        });
       }
     }).whenComplete(() => Navigator.pop(context));
   }

@@ -1,6 +1,7 @@
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
+import 'package:emdy_chat/util/type_util.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
@@ -19,7 +20,7 @@ class AppTextField extends StatelessWidget {
     this.obscureText = false,
     this.textCapitalization,
     this.validator,
-    this.underline = false,
+    this.borderType = BorderType.outline,
     this.buildCounter,
     this.keyboardType,
     this.borderRadius,
@@ -43,7 +44,7 @@ class AppTextField extends StatelessWidget {
   /// Default is [StyleConfig.hintTextStyle]
   final TextStyle? hintStyle;
 
-  /// Widget show in the left of text. This will be ignored if [underline] is true
+  /// Widget show in the left of text. This will be ignored if [borderType] is true
   final Widget? prefixWidget;
 
   /// Widget show in the right of text
@@ -89,11 +90,13 @@ class AppTextField extends StatelessWidget {
   /// Use this to validate value of [TextField]
   final String? Function(String?)? validator;
 
-  /// If true, the border will be underline, only show at bottom of [TextField].
-  /// If false, the border will be outline, show at 4 sides of [TextField]
+  /// Type of border:
+  /// * [BorderType.none] : no border
+  /// * [BorderType.underline] : bottom-border
+  /// * [BorderType.outline] : 4 edges-border
   ///
-  /// Default is false
-  final bool underline;
+  /// Default is [BorderType.none]
+  final BorderType borderType;
 
   final Widget? Function()? buildCounter;
 
@@ -146,7 +149,7 @@ class AppTextField extends StatelessWidget {
         hintStyle: hintStyle ?? StyleConfig.hintTextStyle,
         alignLabelWithHint: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        prefixIcon: underline ? null : prefixWidget,
+        prefixIcon: borderType == BorderType.underline ? null : prefixWidget,
         suffixIcon: suffixWidget,
         border: border,
         enabledBorder: border,
@@ -158,7 +161,16 @@ class AppTextField extends StatelessWidget {
     );
   }
 
-  InputBorder get border => underline ? underlineBorder : outlineBorder;
+  InputBorder get border {
+    switch (borderType) {
+      case BorderType.none:
+        return InputBorder.none;
+      case BorderType.underline:
+        return underlineBorder;
+      default:
+        return outlineBorder;
+    }
+  }
 
   OutlineInputBorder get outlineBorder => OutlineInputBorder(
         borderSide: const BorderSide(color: ColorConfig.navyColorLogo),

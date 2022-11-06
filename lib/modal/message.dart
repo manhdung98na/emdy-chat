@@ -24,9 +24,9 @@ class Message {
   late DateTime time;
 
   /// Kiểu tin nhắn
-  /// * [MessageType.text] = ``1``
-  /// * [MessageType.picture] = ``2``
-  /// * [MessageType.video] = ``3``
+  /// * [MessageType.text] = `1`
+  /// * [MessageType.picture] = `2`
+  /// * [MessageType.video] = `3`
   late int type;
 
   /// Thả cảm xúc tin nhắn. Lưu dưới dạng map: key là ID người dùng, value là cảm xúc

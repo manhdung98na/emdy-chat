@@ -26,13 +26,13 @@ class Chat {
   /// * Gửi hình ảnh [RecentActionType.sentMedia]
   /// * Gửi nhãn dãn [RecentActionType.sentSticker]
   /// * Bày tỏ cảm xúc [RecentActionType.react]
-  late int _recentAction;
+  late int? _recentAction;
 
   /// Người vừa thực hiện [recentAction]
-  late String recentActorId;
+  late String? recentActorId;
 
   /// Thời điển thực hiện [recentAction]
-  late DateTime recentTime;
+  late DateTime? recentTime;
 
   /// Kiểu đoạn chat:
   /// * [ChatType.group]
@@ -42,10 +42,10 @@ class Chat {
 
   /// Tình trạng của đoạn chat, được lưu theo dạng Map với
   /// key là ID của [members] và value là giá trị status
-  /// * [ChatStatus.block] = ``-1``
-  /// * [ChatStatus.ignored] = ``0``
-  /// * [ChatStatus.accepted] = ``1``
-  /// * [ChatStatus.waiting] = ``2``
+  /// * [ChatStatus.block] = `-1`
+  /// * [ChatStatus.ignored] = `0`
+  /// * [ChatStatus.accepted] = `1`
+  /// * [ChatStatus.waiting] = `2`
   /// #### Ví dụ:
   /// * 'idOfMember1': 1,
   /// * 'idOfMember2': -1.
@@ -56,17 +56,23 @@ class Chat {
   /// Nội dung các tin nhắn của đoạn chat
   late List<Message> messages = [];
 
+  /// `true` nếu chưa được lưu vào Cloud (khi người dùng tạo đoạn chat tạm, và khi bấm gửi tin nhắn thì mới bắt đầu tạo ra đoạn chat ở Cloud)
+  ///
+  /// `false` nếu đã được lưu ở cloud
+  late bool isLocal;
+
   Chat(
     this._id, {
     required this.avatar,
     required this.members,
     required this.name,
     required this.nicknames,
-    required int recentAction,
+    required int? recentAction,
     required this.recentActorId,
     required this.recentTime,
     required this.type,
     required Map<String, dynamic> status,
+    this.isLocal = false,
   }) {
     _recentAction = recentAction;
     _status = status.cast();
@@ -80,15 +86,22 @@ class Chat {
     nicknames = (doc.get('nicknames') as Map).cast<String, String>();
     _recentAction = doc.get('recentAction');
     recentActorId = doc.get('recentActor');
-    recentTime = (doc.get('recentTime') as Timestamp).toDate();
+    if (doc.get('recentTime') == null) {
+      recentTime = null;
+    } else {
+      recentTime = (doc.get('recentTime') as Timestamp).toDate();
+    }
     type = doc.get('type');
     _status = (doc.get('status') as Map).cast<String, int>();
+    isLocal = false;
   }
 
   String get id => _id;
 
   String get recentAction {
     switch (_recentAction) {
+      case null:
+        return '';
       case RecentActionType.react:
         return 'reacted your message';
       case RecentActionType.sentMessage:
@@ -153,17 +166,43 @@ class Chat {
         .onError((error, stackTrace) => error.toString());
   }
 
-  Future<String> delete() async {
-    return await FirebaseFirestore.instance
+  Future<void> delete() async {
+    final batch = FirebaseFirestore.instance.batch();
+    var collection = FirebaseFirestore.instance
         .collection(FirebaseManager.chatCollection)
         .doc(id)
-        .delete()
-        .then((value) => success)
-        .onError((error, stackTrace) => error.toString());
+        .collection(FirebaseManager.messageCollection);
+
+    var snapshots = await collection.get();
+    for (var doc in snapshots.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit().then((value) async {
+      await FirebaseFirestore.instance
+          .collection(FirebaseManager.chatCollection)
+          .doc(id)
+          .delete()
+          .then((value) => success)
+          .onError((error, stackTrace) => error.toString());
+    });
   }
 
   @override
   String toString() {
     return 'ChatName: $name, members: ${members.toString()}, nickname: $nicknames';
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'avatar': avatar,
+      'members': members.toList(),
+      'name': name,
+      'nicknames': nicknames,
+      'recentAction': _recentAction,
+      'recentActor': recentActorId,
+      'recentTime': recentTime,
+      'status': _status,
+      'type': type,
+    };
   }
 }

@@ -70,15 +70,6 @@ class DrawerAvatar extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.pop(dialogContext);
-              UserAvatarController.instance.removeAvatar(context);
-            },
-            title: const AppText(text: 'Remove avatar'),
-            minLeadingWidth: 20,
-            leading: const Icon(Icons.highlight_off, color: Colors.red),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.pop(dialogContext);
               UserAvatarController.instance.updateAvatar(context);
             },
             title: const AppText(text: 'Choose from device'),
@@ -86,6 +77,16 @@ class DrawerAvatar extends StatelessWidget {
             leading: const Icon(Icons.photo_library,
                 color: ColorConfig.purpleColorLogo),
           ),
+          if (UserManager.currentUser!.hasAvatar)
+            ListTile(
+              onTap: () {
+                Navigator.pop(dialogContext);
+                UserAvatarController.instance.removeAvatar(context);
+              },
+              title: const AppText(text: 'Remove avatar'),
+              minLeadingWidth: 20,
+              leading: const Icon(Icons.highlight_off, color: Colors.red),
+            ),
         ],
       ),
     );

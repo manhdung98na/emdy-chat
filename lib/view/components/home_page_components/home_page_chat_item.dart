@@ -42,11 +42,17 @@ class HomePageChatItem extends StatelessWidget {
     );
   }
 
-  String get name =>
-      chat.recentActorId == UserManager.uid ? 'You' : chat.recentActorName;
+  String get name {
+    if (chat.recentActorId != null) {
+      return chat.recentActorId == UserManager.uid
+          ? 'You'
+          : chat.recentActorName;
+    }
+    return '';
+  }
 
   Widget get chatAvatar {
-    if (HomePageController.instance.avatar.containsKey(chat.theOppositeId) ||
+    if (HomePageController.instance.avatar.containsKey(chat.theOppositeId) &&
         HomePageController.instance.avatar[chat.theOppositeId] != null) {
       return Image.memory(
         HomePageController.instance.avatar[chat.theOppositeId]!,

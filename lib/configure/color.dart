@@ -14,6 +14,6 @@ class ColorConfig {
   static const Color cream = Color(0xfffaedcd);
 
   static const Color hintTextColor = Colors.black54;
-  static const Color contentTextColor = Colors.black87;
-  static const Color titleTextColor = Colors.black87;
+  static const Color contentTextColor = navyColorLogo; //black87
+  static const Color titleTextColor = navyColorLogo; //black87
 }

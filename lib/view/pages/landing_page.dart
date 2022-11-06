@@ -17,7 +17,6 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   void initState() {
-    UserManager.getAvatar();
     super.initState();
     stream = FirebaseAuth.instance.authStateChanges();
   }

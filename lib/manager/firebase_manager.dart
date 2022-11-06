@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 
 class FirebaseManager {
@@ -19,6 +21,11 @@ class FirebaseManager {
   static const String videoStorage = 'vids';
 
   static String randomId() {
-    return DateTime.now().millisecondsSinceEpoch.toString();
+    DateTime now = DateTime.now();
+    int idTemp = now.millisecondsSinceEpoch;
+    for (int i = 1; i <= 3; i++) {
+      idTemp = idTemp * 10 + Random().nextInt(10);
+    }
+    return idTemp.toString();
   }
 }

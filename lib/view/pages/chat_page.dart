@@ -4,20 +4,13 @@ import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
-import 'package:emdy_chat/manager/file_manager.dart';
 import 'package:emdy_chat/modal/chat.dart';
-import 'package:emdy_chat/util/constant.dart';
 import 'package:emdy_chat/util/popup_util.dart';
-import 'package:emdy_chat/util/type_util.dart';
+import 'package:emdy_chat/view/components/chat_page_component/chat_page_body.dart';
 import 'package:emdy_chat/view/components/chat_page_component/chat_page_bottom_sheet.dart';
-import 'package:emdy_chat/view/components/chat_page_component/message_item/message_item.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
-import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:emdy_chat/view/controls/error_media.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.chat});
@@ -45,43 +38,15 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: controller,
-      child: Consumer<ChatPageController>(
-        child: buildAppBar(),
-        builder: (_, controller, appBar) {
-          return Scaffold(
-            appBar: appBar as PreferredSizeWidget,
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    reverse: true,
-                    itemCount: controller.chat.messages.length,
-                    itemBuilder: (context, index) {
-                      return MessageItem(
-                        key: Key(controller.chat.messages[index].id),
-                        chat: controller.chat,
-                        index: index,
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 8),
-                buildBottomButtonRow(),
-                const SizedBox(height: 4)
-              ],
-            ),
-          );
-        },
-      ),
+    return Scaffold(
+      appBar: buildAppBar(),
+      body: ChatPageBody(controller: controller),
     );
   }
 
   Widget get chatAvatar {
     if (HomePageController.instance.avatar
-            .containsKey(widget.chat.theOppositeId) ||
+            .containsKey(widget.chat.theOppositeId) &&
         HomePageController.instance.avatar[widget.chat.theOppositeId] != null) {
       return Image.memory(
         HomePageController.instance.avatar[widget.chat.theOppositeId]!,
@@ -157,76 +122,5 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ],
     );
-  }
-
-  Row buildBottomButtonRow() {
-    return Row(
-      children: [
-        IconButton(
-          splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
-          onPressed: () {},
-          iconSize: 30,
-          icon: const Icon(Icons.camera_alt_rounded),
-        ),
-        IconButton(
-          splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
-          iconSize: 30,
-          onPressed: pickImageAndSend,
-          icon: const Icon(Icons.photo_rounded),
-        ),
-        Expanded(
-          child: AppTextField(
-            controller: controller.teMessage,
-            hint: 'Message',
-            keyboardType: TextInputType.multiline,
-            textInputAction: TextInputAction.newline,
-            borderRadius: 30,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            maxLines: null,
-            boxConstraints: const BoxConstraints(maxHeight: 40),
-            suffixWidget: IconButton(
-              onPressed: sendMessage,
-              icon: const Icon(Icons.send_rounded),
-            ),
-          ),
-        ),
-        IconButton(
-          splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
-          iconSize: 30,
-          onPressed: () {
-            sendMessage(message: likeCharacter);
-          },
-          icon: const Icon(Icons.thumb_up),
-        ),
-      ],
-    );
-  }
-
-  void sendMessage({String? message}) async {
-    String result = await controller.sendMessage(message: message);
-    if (result != success && mounted) {
-      PopupUtil.showSnackBar(context, result);
-    }
-  }
-
-  void pickImageAndSend() async {
-    PlatformFile? file = await FileManager.pickSingleMedia(context);
-    if (file == null || file.extension == null) {
-      return;
-    }
-
-    int fileType = FileManager.checkType(file.extension!);
-    Uint8List compressedImage;
-    if (fileType == MessageType.picture) {
-      compressedImage = await FileManager.compressImage(file);
-    } else if (fileType == MessageType.video) {
-      compressedImage = await FileManager.compressVideo(file);
-    } else {
-      compressedImage = file.bytes!;
-    }
-    controller.sendImage(compressedImage, fileType);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
@@ -60,18 +62,6 @@ class LeftDrawer extends StatelessWidget {
               style: StyleConfig.titleTextStyle,
             ),
           ),
-          _buildTitle('Messages'),
-          ListTile(
-            onTap: () {},
-            leading: const RoundedIcon(
-              iconData: Icons.pending,
-              color: Colors.blue,
-            ),
-            title: const AppText(
-              text: 'Waiting chats',
-              style: StyleConfig.titleTextStyle,
-            ),
-          ),
           _buildTitle('Others'),
           ListTile(
             onTap: () {
@@ -83,6 +73,19 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: const AppText(
               text: 'Sign out',
+              style: StyleConfig.titleTextStyle,
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              exit(0);
+            },
+            leading: const RoundedIcon(
+              iconData: Icons.flash_off_sharp,
+              color: Colors.brown,
+            ),
+            title: const AppText(
+              text: 'Quit app',
               style: StyleConfig.titleTextStyle,
             ),
           ),

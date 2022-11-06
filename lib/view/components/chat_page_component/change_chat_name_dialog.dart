@@ -3,6 +3,7 @@ import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/util/constant.dart';
 import 'package:emdy_chat/util/popup_util.dart';
+import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
                 readOnly: isLoading,
                 controller: teName,
                 autoFocus: true,
-                underline: true,
+                borderType: BorderType.underline,
                 textCapitalization: TextCapitalization.words,
                 padding: const EdgeInsets.only(top: 15),
                 validator: (v) {

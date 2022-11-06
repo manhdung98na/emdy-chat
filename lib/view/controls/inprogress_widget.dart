@@ -5,7 +5,9 @@ import 'package:emdy_chat/configure/color.dart';
 import 'package:flutter/material.dart';
 
 class InprogressWidget extends StatefulWidget {
-  const InprogressWidget({super.key});
+  const InprogressWidget({super.key, this.size = 180});
+
+  final double size;
 
   @override
   State<InprogressWidget> createState() => InprogressWidgetState();
@@ -15,7 +17,6 @@ class InprogressWidgetState extends State<InprogressWidget>
     with TickerProviderStateMixin {
   late AnimationController firstController, secondController;
   late Animation firstAnimation, secondAnimation;
-  double size = 180;
 
   @override
   void initState() {
@@ -48,8 +49,8 @@ class InprogressWidgetState extends State<InprogressWidget>
     return Dialog(
       child: Center(
         child: Container(
-          width: size,
-          height: size,
+          width: widget.size,
+          height: widget.size,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: ColorConfig.primaryColor,
@@ -63,10 +64,14 @@ class InprogressWidgetState extends State<InprogressWidget>
                 builder: (context, child) => CustomPaint(
                   painter: LoadingPainter(
                       firstAnimation.value, secondAnimation.value),
-                  size: const Size(110, 110),
+                  size: Size(widget.size * 0.6, widget.size * 0.6),
                 ),
               ),
-              Image.asset(AssetsConfig.logo, height: 50, width: 50)
+              Image.asset(
+                AssetsConfig.logo,
+                height: widget.size * 0.27,
+                width: widget.size * 0.27,
+              )
             ],
           ),
         ),
@@ -86,13 +91,13 @@ class LoadingPainter extends CustomPainter {
     Paint firstArc = Paint()
       ..color = ColorConfig.navyColorLogo
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 7
+      ..strokeWidth = size.width * 0.064
       ..strokeCap = StrokeCap.round;
 
     Paint secondArc = Paint()
       ..color = ColorConfig.purpleColorLogo
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 7
+      ..strokeWidth = size.width * 0.064
       ..strokeCap = StrokeCap.round;
 
     canvas.drawArc(

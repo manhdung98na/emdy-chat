@@ -58,24 +58,30 @@ class HomePageController extends ChangeNotifier {
         .snapshots()
         .listen((snapshots) async {
       chats.clear();
-      if (snapshots.size == 0) {
-        return;
-      }
-      for (var doc in snapshots.docs) {
-        Chat temp = Chat.fromDocumentSnapshot(doc);
-        chats.add(temp);
-        if (!avatar.containsKey(temp.theOppositeId)) {
-          avatar[temp.theOppositeId] = await FirebaseStorage.instance
-              .ref('${FirebaseManager.usersStorage}/${temp.theOppositeId}')
-              .getData();
+      if (snapshots.size > 0) {
+        for (var doc in snapshots.docs) {
+          Chat temp = Chat.fromDocumentSnapshot(doc);
+          chats.add(temp);
+          if (!avatar.containsKey(temp.theOppositeId)) {
+            avatar[temp.theOppositeId] = await FirebaseStorage.instance
+                .ref('${FirebaseManager.usersStorage}/${temp.theOppositeId}')
+                .getData()
+                .then((value) => value)
+                .onError((error, stackTrace) => null);
+          }
         }
-      }
-      chats.sort((a, b) => a.recentTime.compareTo(b.recentTime));
-      for (var docChange in snapshots.docChanges) {
-        var chatChange =
-            chats.firstWhere((element) => element.id == docChange.doc.id);
-        if (ChatPageController.instances.containsKey(chatChange.id)) {
-          ChatPageController.instances[chatChange.id]!.rebuild(chatChange);
+        chats.sort((a, b) {
+          if (a.recentTime != null && b.recentTime != null) {
+            return a.recentTime!.compareTo(b.recentTime!);
+          }
+          return a.name.compareTo(b.name);
+        });
+        for (var docChange in snapshots.docChanges) {
+          var chatChange =
+              chats.firstWhere((element) => element.id == docChange.doc.id);
+          if (ChatPageController.instances.containsKey(chatChange.id)) {
+            ChatPageController.instances[chatChange.id]!.rebuild(chatChange);
+          }
         }
       }
       notifyListeners();
@@ -96,8 +102,12 @@ class HomePageController extends ChangeNotifier {
         return chats.where((element) => element.status == ChatStatus.accepted);
       case 1:
         return chats.where((element) => element.status == ChatStatus.ignored);
-      default:
+      case 2:
         return chats.where((element) => element.status == ChatStatus.block);
+      case 3:
+        return chats.where((element) => element.status == ChatStatus.waiting);
+      default:
+        throw Exception('Wrong ChatStatus');
     }
   }
 

@@ -2,8 +2,10 @@ import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/change_nickname_controller.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
+import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/util/constant.dart';
 import 'package:emdy_chat/util/popup_util.dart';
+import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
@@ -44,25 +46,37 @@ class ChangeNicknameDialog extends StatelessWidget {
                       readOnly: controller.isLoading,
                       controller: controller.thisNickname,
                       autoFocus: true,
-                      underline: true,
+                      borderType: BorderType.underline,
                       textCapitalization: TextCapitalization.words,
                       padding: const EdgeInsets.only(top: 15),
                       buildCounter: () => AppText(
-                        text: controller.currentUserNickname,
+                        text: UserManager.currentUser?.fullName ?? 'You',
                         style: StyleConfig.hintTextStyle,
                       ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Nickname can not be empty!';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 8),
                     AppTextField(
                       readOnly: controller.isLoading,
                       controller: controller.otherNickname,
-                      underline: true,
+                      borderType: BorderType.underline,
                       textCapitalization: TextCapitalization.words,
                       padding: const EdgeInsets.only(top: 15),
                       buildCounter: () => AppText(
                         text: controller.theOpposite?.fullName ?? '',
                         style: StyleConfig.hintTextStyle,
                       ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Nickname can not be empty!';
+                        }
+                        return null;
+                      },
                     ),
                     Container(
                       alignment: Alignment.center,

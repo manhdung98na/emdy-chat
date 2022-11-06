@@ -191,7 +191,11 @@ class ChatPageBottomSheet extends StatelessWidget {
     var key = GlobalKey<InprogressWidgetState>();
     PopupUtil.showLoadingDialog(context, key);
     await controller.deleteChat().then((value) {
-      Navigator.pop(key.currentState!.context);
+      // Navigator.pop(key.currentState!.context);
+      Navigator.popUntil(
+        chatPageContext,
+        (route) => route.isFirst,
+      );
     });
   }
 }

@@ -22,10 +22,7 @@ class HomePageBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 searchWidget,
-                ...controller
-                    .filterChats()
-                    .map((e) => HomePageChatItem(chat: e))
-                    .toList(),
+                ...buildList(),
               ],
             );
           },
@@ -52,5 +49,34 @@ class HomePageBody extends StatelessWidget {
         onChange: (value) {},
       ),
     );
+  }
+
+  List<Widget> buildList() {
+    var listChat = controller.filterChats();
+    if (listChat.isEmpty) {
+      var alignment = Alignment.topCenter;
+      return [
+        const SizedBox(height: 100),
+        SizedBox(
+          height: 100,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              Future.delayed(
+                Duration.zero,
+                () => setState(() => alignment = Alignment.bottomCenter),
+              );
+              return AnimatedAlign(
+                alignment: alignment,
+                curve: Curves.bounceOut,
+                duration: const Duration(milliseconds: 500),
+                child: const Text('No available chat'),
+              );
+            },
+          ),
+        )
+      ];
+    }
+
+    return listChat.map((e) => HomePageChatItem(chat: e)).toList();
   }
 }

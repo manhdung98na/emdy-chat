@@ -75,6 +75,8 @@ class RegisterController extends ChangeNotifier {
         .set({
           'email': userCredential.user!.email,
           'fullName': teName.text.trim(),
+          'userId': userCredential.user!.uid,
+          'hasAvatar': false,
         })
         .then((value) => success)
         .onError((error, stackTrace) {

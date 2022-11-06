@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emdy_chat/controller/new_chat_controller.dart';
 import 'package:emdy_chat/manager/firebase_manager.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/modal/chat.dart';
@@ -30,7 +31,7 @@ class ChatPageController extends ChangeNotifier {
   }
 
   void listenMessagesOfChat() {
-    print('AsyncMessages of ChatID = ${chat.id}: Init');
+    debugPrint('AsyncMessages of ChatID = ${chat.id}: Init');
     streamSubscription?.cancel();
     streamSubscription = FirebaseFirestore.instance
         .collection(FirebaseManager.chatCollection)
@@ -52,6 +53,13 @@ class ChatPageController extends ChangeNotifier {
     if (content.isEmpty) {
       return success;
     }
+
+    bool isCreateNewChat =
+        chat.isLocal ? await NewChatController.createNewChat(chat) : true;
+    if (!isCreateNewChat) {
+      return 'Create new chat fail!';
+    }
+
     late String result;
     teMessage.clear();
     await FirebaseFirestore.instance
@@ -138,7 +146,8 @@ class ChatPageController extends ChangeNotifier {
     await chat.delete().then((value) {
       FirebaseStorage.instance
           .ref('${FirebaseManager.messagesStorage}/${chat.id}')
-          .delete();
+          .delete()
+          .onError((error, stackTrace) => null);
     });
   }
 

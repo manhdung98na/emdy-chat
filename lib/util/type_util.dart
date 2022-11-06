@@ -1,5 +1,7 @@
 enum PasswordHeath { mustHave6Character, weak, good, strong }
 
+enum BorderType { none, underline, outline }
+
 class RecentActionType {
   RecentActionType._();
 

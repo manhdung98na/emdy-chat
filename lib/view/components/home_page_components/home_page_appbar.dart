@@ -53,15 +53,6 @@ class HomePageAppBarState extends State<HomePageAppBar> {
             size: 18,
           ),
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: appBarButtonStyle,
-          child: const Icon(
-            Icons.edit,
-            color: Colors.black,
-            size: 18,
-          ),
-        ),
       ],
     );
   }
