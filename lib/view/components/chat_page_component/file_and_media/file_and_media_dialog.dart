@@ -7,6 +7,7 @@ import 'package:emdy_chat/view/components/chat_page_component/file_and_media/cha
 import 'package:emdy_chat/view/components/chat_page_component/file_and_media/chat_videos.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class FileAndMediaDialog extends StatefulWidget {
@@ -60,8 +61,8 @@ class _FileAndMediaDialogState extends State<FileAndMediaDialog> {
   AppBar buildAppBar() {
     return AppBar(
       elevation: SizeConfig.elevation,
-      title: const Text(
-        'Files & Medias',
+      title: Text(
+        AppLocalizations.of(context)!.fileAndMedia,
         style: StyleConfig.titleTextStyle,
       ),
     );
@@ -75,13 +76,13 @@ class _FileAndMediaDialogState extends State<FileAndMediaDialog> {
           icon: controller.indexScreen == 0
               ? const Icon(Icons.photo_library_rounded, size: 28)
               : const Icon(Icons.photo_library_outlined, size: 20),
-          label: 'Images',
+          label: AppLocalizations.of(context)!.images,
         ),
         BottomNavigationBarItem(
           icon: controller.indexScreen == 1
               ? const Icon(Icons.video_library_rounded, size: 28)
               : const Icon(Icons.video_library_outlined, size: 20),
-          label: 'Videos',
+          label: AppLocalizations.of(context)!.videos,
         ),
       ],
       currentIndex: controller.indexScreen,

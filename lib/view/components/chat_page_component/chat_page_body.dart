@@ -11,6 +11,7 @@ import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatPageBody extends StatelessWidget {
   const ChatPageBody({super.key, required this.controller});
@@ -69,7 +70,7 @@ class ChatPageBody extends StatelessWidget {
         Expanded(
           child: AppTextField(
             controller: controller.teMessage,
-            hint: 'Message',
+            hint: AppLocalizations.of(context)!.message,
             keyboardType: TextInputType.multiline,
             textInputAction: TextInputAction.newline,
             borderRadius: 30,

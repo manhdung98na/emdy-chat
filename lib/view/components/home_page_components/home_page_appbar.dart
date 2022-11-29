@@ -5,6 +5,7 @@ import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePageAppBar extends StatefulWidget with PreferredSizeWidget {
   const HomePageAppBar({super.key});
@@ -39,8 +40,8 @@ class HomePageAppBarState extends State<HomePageAppBar> {
           ),
         ),
       ),
-      title: const AppText(
-        text: 'Messages',
+      title: AppText(
+        text: AppLocalizations.of(context)!.message,
         style: StyleConfig.headerTextStyle,
       ),
       actions: [

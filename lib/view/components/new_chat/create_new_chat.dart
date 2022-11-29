@@ -10,6 +10,7 @@ import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewChat extends StatelessWidget {
   const NewChat({super.key});
@@ -17,7 +18,7 @@ class NewChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
+      appBar: buidlAppBar(context),
       backgroundColor: ColorConfig.primaryColor,
       body: ChangeNotifierProvider(
         create: (context) => NewChatController(),
@@ -42,12 +43,12 @@ class NewChat extends StatelessWidget {
     );
   }
 
-  AppBar get appBar => AppBar(
+  AppBar buidlAppBar(BuildContext context) => AppBar(
         backgroundColor: ColorConfig.primaryColor,
-        title: const Hero(
+        title: Hero(
           tag: "CreateNewChat",
           child: AppText(
-            text: 'New message',
+            text: AppLocalizations.of(context)!.newMessage,
             style: StyleConfig.titleTextStyle,
           ),
         ),
@@ -63,13 +64,15 @@ class NewChat extends StatelessWidget {
           Container(
             width: 50,
             alignment: Alignment.center,
-            child: const AppText(text: 'To:', textAlign: TextAlign.center),
+            child: AppText(
+                text: '${AppLocalizations.of(context)!.to}:',
+                textAlign: TextAlign.center),
           ),
           Expanded(
             child: AppTextField(
               autoFocus: true,
               borderType: BorderType.none,
-              hint: 'Input UID of receiver',
+              hint: AppLocalizations.of(context)!.inputReceiverUID,
               padding: const EdgeInsets.symmetric(vertical: 10),
               textCapitalization: TextCapitalization.none,
               // prefixWidget: Row(

@@ -1,0 +1,92 @@
+{
+    "password": "Password",
+    "@password": {
+      "description": "Password of Emdy account"
+    },
+    "email": "Email",
+    "@email": {
+      "description": "Email of Emdy account"
+    },
+    "passwordCanNotEmpty": "Password can not be empty!",
+    "@passwordCanNotEmpty":{
+      "description": "Alert when user logins without typing password"
+    },
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "registerHere": "Register here",
+    "loginNow": "Login now",
+    "register": "REGISTER",
+    "name": "Name",
+    "example": "Example",
+    "dontHaveAccount": "Don't have account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "weakPassword": "Password is weak!",
+    "@weakPassword":{
+      "description": "Alert when user types password"
+    },
+    "goodPassword": "Password is good!",
+    "@goodPassword":{
+      "description": "Alert when user types password"
+    },
+    "strongPassword": "Password is strong!",
+    "@strongPassword":{
+      "description": "Alert when user types password"
+    },
+    "passwordMinLength": "Password must have at least 6 characters!",
+    "@strongPassword":{
+      "description": "Alert when user types password"
+    },
+    "loadMore": "Load more",
+    "newMessage": "New message",
+    "message": "Messages",
+    "noAvailableChat": "No available chat",
+    "to": "To",
+    "inputReceiverUID": "Input UID of receiver",
+    "reactMessageNotSuccess": "React message not success!",
+    "updateAvatar": "Update avatar",
+    "chooseFromDevice": "Choose from device",
+    "removeAvatar": "Remove avatar",
+    "accepted": "Accepted",
+    "ignored": "Ignored",
+    "unignored": "Un-ignored",
+    "blocked": "Blocked",
+    "unblock": "Unblock",
+    "waiting": "Waiting",
+    "you": "You",
+    "messageContentCopied": "Message content was copied!",
+    "copy": "Copy",
+    "delete": "Delete",
+    "conversationAvatar": "Conversation avatar",
+    "conversationName": "Conversation name",
+    "nicknames": "Nicknames",
+    "fileAndMedia": "File and Media",
+    "nicknameCannotEmpty": "Nickname can not be empty!",
+    "@nicknameCannotEmpty": {
+      "description": "Alert when user change nickname to empty"
+    },
+    "nameCannotEmpty": "Name can not be empty!",
+    "@nameCannotEmpty": {
+      "description": "Alert when user change name to empty"
+    },
+    "changeNameToturial": "To change conversation name, please type new name and save!",
+    "@changeNameToturial": {
+      "description": "Tutorial message when user changes name"
+    },
+    "save": "Save",
+    "images": "Images",
+    "videos": "Videos",
+    "userInfo": "User info",
+    "profile": "Profile",
+    "system": "System",
+    "language": "Language",
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "others": "Others",
+    "signOut": "Sign out",
+    "quitApp": "Quit app",
+    "report": "Report",
+    "aboutUs": "About us"
+}

@@ -7,6 +7,7 @@ import 'package:emdy_chat/util/popup_util.dart';
 import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/components/chat_page_component/message_item_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReactionScreen extends StatefulWidget {
   const ReactionScreen(
@@ -125,7 +126,8 @@ class _ReactionScreenState extends State<ReactionScreen>
     } else {
       await widget.message.updateReaction(type).then((result) {
         if (!result) {
-          PopupUtil.showSnackBar(context, 'React message not success!');
+          PopupUtil.showSnackBar(
+              context, AppLocalizations.of(context)!.reactMessageNotSuccess);
         }
       });
     }

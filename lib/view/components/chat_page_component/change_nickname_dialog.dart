@@ -10,6 +10,7 @@ import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeNicknameDialog extends StatelessWidget {
   const ChangeNicknameDialog({super.key, required this.controller});
@@ -33,7 +34,7 @@ class ChangeNicknameDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText(
-                      text: 'Nicknames',
+                      text: AppLocalizations.of(context)!.nicknames,
                       style: StyleConfig.headerTextStyle.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -50,12 +51,14 @@ class ChangeNicknameDialog extends StatelessWidget {
                       textCapitalization: TextCapitalization.words,
                       padding: const EdgeInsets.only(top: 15),
                       buildCounter: () => AppText(
-                        text: UserManager.currentUser?.fullName ?? 'You',
+                        text: UserManager.currentUser?.fullName ??
+                            AppLocalizations.of(context)!.you,
                         style: StyleConfig.hintTextStyle,
                       ),
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'Nickname can not be empty!';
+                          return AppLocalizations.of(context)!
+                              .nicknameCannotEmpty;
                         }
                         return null;
                       },
@@ -73,7 +76,8 @@ class ChangeNicknameDialog extends StatelessWidget {
                       ),
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'Nickname can not be empty!';
+                          return AppLocalizations.of(context)!
+                              .nicknameCannotEmpty;
                         }
                         return null;
                       },
@@ -92,7 +96,7 @@ class ChangeNicknameDialog extends StatelessWidget {
                         },
                         icon: const Icon(Icons.save),
                         label: Text(
-                          'Save',
+                          AppLocalizations.of(context)!.save,
                           style: StyleConfig.contentTextStyle.copyWith(
                             color: ColorConfig.primaryColor,
                           ),

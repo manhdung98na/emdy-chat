@@ -6,6 +6,7 @@ import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerAvatar extends StatelessWidget {
   const DrawerAvatar({super.key});
@@ -63,7 +64,7 @@ class DrawerAvatar extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(SizeConfig.borderRadius),
         ),
-        title: const Text('Update avatar'),
+        title: Text(AppLocalizations.of(context)!.updateAvatar),
         titleTextStyle: StyleConfig.headerTextStyle,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
@@ -72,7 +73,8 @@ class DrawerAvatar extends StatelessWidget {
               Navigator.pop(dialogContext);
               UserAvatarController.instance.updateAvatar(context);
             },
-            title: const AppText(text: 'Choose from device'),
+            title:
+                AppText(text: AppLocalizations.of(context)!.chooseFromDevice),
             minLeadingWidth: 20,
             leading: const Icon(Icons.photo_library,
                 color: ColorConfig.purpleColorLogo),
@@ -83,7 +85,7 @@ class DrawerAvatar extends StatelessWidget {
                 Navigator.pop(dialogContext);
                 UserAvatarController.instance.removeAvatar(context);
               },
-              title: const AppText(text: 'Remove avatar'),
+              title: AppText(text: AppLocalizations.of(context)!.removeAvatar),
               minLeadingWidth: 20,
               leading: const Icon(Icons.highlight_off, color: Colors.red),
             ),

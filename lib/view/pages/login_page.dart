@@ -3,12 +3,14 @@ import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/route.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
+import 'package:emdy_chat/controller/locale_controller.dart';
 import 'package:emdy_chat/controller/login_controller.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:emdy_chat/view/pages/register_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -40,7 +42,7 @@ class LoginPage extends StatelessWidget {
                       AppTextField(
                         prefixWidget: const Icon(Icons.email_rounded),
                         controller: controller.teEmail,
-                        label: 'Email',
+                        label: AppLocalizations.of(context)!.email,
                         textInputAction: TextInputAction.next,
                         textCapitalization: TextCapitalization.none,
                         keyboardType: TextInputType.emailAddress,
@@ -48,7 +50,7 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height: SizeConfig.rowSpace),
                       AppTextField(
                         prefixWidget: const Icon(Icons.lock_rounded),
-                        label: 'Password',
+                        label: AppLocalizations.of(context)!.password,
                         textInputAction: TextInputAction.done,
                         obscureText: controller.hidePassword,
                         suffixWidget: IconButton(
@@ -60,7 +62,8 @@ class LoginPage extends StatelessWidget {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Password can not be empty!';
+                            return AppLocalizations.of(context)!
+                                .passwordCanNotEmpty;
                           }
                           return null;
                         },
@@ -75,6 +78,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           _buildSignUp(context),
+          const SizedBox(height: 10),
+          _buildMultiLanguage(context),
           const SizedBox(height: 35),
         ],
       ),
@@ -109,7 +114,7 @@ class LoginPage extends StatelessWidget {
         onPressed: () => controller.login(context),
         icon: const Icon(Icons.login_rounded),
         label: AppText(
-          text: 'Sign in',
+          text: AppLocalizations.of(context)!.signIn,
           style: StyleConfig.contentTextStyle.copyWith(color: Colors.white),
         ),
       );
@@ -117,11 +122,11 @@ class LoginPage extends StatelessWidget {
   Widget _buildSignUp(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: 'Don\'t have account? ',
+        text: '${AppLocalizations.of(context)!.dontHaveAccount} ',
         style: StyleConfig.contentTextStyle,
         children: [
           TextSpan(
-            text: 'Register here',
+            text: AppLocalizations.of(context)!.registerHere,
             recognizer: TapGestureRecognizer()
               ..onTap =
                   () => RouteConfig.pushWidget(context, const RegisterPage()),
@@ -133,6 +138,28 @@ class LoginPage extends StatelessWidget {
         ],
       ),
       textAlign: TextAlign.center,
+    );
+  }
+
+  Row _buildMultiLanguage(BuildContext context) {
+    var localeProvider = Provider.of<LocaleController>(context);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () {
+            localeProvider.setLocale(const Locale('vi'));
+          },
+          child: const Text('Vi', style: TextStyle(color: Colors.black)),
+        ),
+        TextButton(
+          onPressed: () {
+            localeProvider.setLocale(const Locale('en'));
+          },
+          child: const Text('En', style: TextStyle(color: Colors.black)),
+        ),
+      ],
     );
   }
 }

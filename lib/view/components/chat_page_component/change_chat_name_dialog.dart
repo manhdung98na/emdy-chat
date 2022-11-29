@@ -7,6 +7,7 @@ import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeChatNameDialog extends StatefulWidget {
   const ChangeChatNameDialog({super.key, required this.controller});
@@ -41,14 +42,13 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppText(
-              text: 'Conversation name',
+              text: AppLocalizations.of(context)!.conversationName,
               style: StyleConfig.headerTextStyle.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const AppText(
-              text:
-                  'To change conversation name, please type new name and save!',
+            AppText(
+              text: AppLocalizations.of(context)!.changeNameToturial,
               maxLines: 2,
               style: StyleConfig.hintTextStyle,
             ),
@@ -66,7 +66,7 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
                 padding: const EdgeInsets.only(top: 15),
                 validator: (v) {
                   if (v?.trim().isEmpty ?? true) {
-                    return 'Name can not empty';
+                    return AppLocalizations.of(context)!.nameCannotEmpty;
                   }
                   return null;
                 },

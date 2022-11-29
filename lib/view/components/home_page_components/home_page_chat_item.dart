@@ -9,6 +9,7 @@ import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/error_media.dart';
 import 'package:emdy_chat/view/pages/chat_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePageChatItem extends StatelessWidget {
   const HomePageChatItem({super.key, required this.chat});
@@ -36,16 +37,16 @@ class HomePageChatItem extends StatelessWidget {
         textOverflow: TextOverflow.ellipsis,
       ),
       subtitle: AppText(
-        text: '$name ${chat.recentAction}',
+        text: '${getName(context)} ${chat.recentAction}',
         style: StyleConfig.hintTextStyle,
       ),
     );
   }
 
-  String get name {
+  String getName(BuildContext context) {
     if (chat.recentActorId != null) {
       return chat.recentActorId == UserManager.uid
-          ? 'You'
+          ? AppLocalizations.of(context)!.you
           : chat.recentActorName;
     }
     return '';

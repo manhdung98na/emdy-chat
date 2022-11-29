@@ -1,0 +1,92 @@
+{
+    "password": "Mật khẩu",
+    "@password": {
+      "description": "Mật khẩu của tài khoản Emdy"
+    },
+    "email": "Email",
+    "@email": {
+      "description": "Email của tài khoản Emdy"
+    },
+    "passwordCanNotEmpty": "Mật khẩu không được để trống!",
+    "@passwordCanNotEmpty":{
+      "description": "Cảnh báo khi người dùng đăng nhập nhưng không nhập mật khẩu"
+    },
+    "signIn": "Đăng nhập",
+    "signUp": "Đăng kí",
+    "registerHere": "Đăng kí",
+    "loginNow": "Đăng nhập",
+    "register": "ĐĂNG NHẬP",
+    "name": "Tên",
+    "example": "Ví dụ",
+    "dontHaveAccount": "Chưa có tài khoản?",
+    "alreadyHaveAccount": "Đã có tài khoản?",
+    "weakPassword": "Mật khẩu yếu!",
+    "@weakPassword":{
+      "description": "Thông báo khi người dùng nhập mật khẩu"
+    },
+    "goodPassword": "Mật khẩu tốt!",
+    "@goodPassword":{
+      "description": "Thông báo khi người dùng nhập mật khẩu"
+    },
+    "strongPassword": "Mật khẩu mạnh!",
+    "@strongPassword":{
+      "description": "Thông báo khi người dùng nhập mật khẩu"
+    },
+    "passwordMinLength": "Mật khẩu phải có ít nhất 6 kí tự!",
+    "@strongPassword":{
+      "description": "Thông báo khi người dùng nhập mật khẩu"
+    },
+    "loadMore": "Tải thêm",
+    "newMessage": "Tin nhắn mới",
+    "message": "Tin nhắn",
+    "noAvailableChat": "Không có đoạn chat hợp lệ",
+    "to": "Đến",
+    "inputReceiverUID": "Nhập UID của người nhận",
+    "reactMessageNotSuccess": "Thả cảm xúc thất bại!",
+    "updateAvatar": "Cập nhật ảnh đại diện",
+    "chooseFromDevice": "Chọn từ thiết bị",
+    "removeAvatar": "Xóa ảnh đại diện",
+    "accepted": "Chấp nhận",
+    "ignored": "Bỏ qua",
+    "unignored": "Hoàn tác bỏ qua",
+    "blocked": "Chặn",
+    "unblock": "Hoàn tác chặn",
+    "waiting": "Chờ",
+    "you": "Bạn",
+    "messageContentCopied": "Nội dung tin nhắn đã được sao chép!",
+    "copy": "Sao chép",
+    "delete": "Xóa",
+    "conversationAvatar": "Ảnh cuộc hội thoại",
+    "conversationName": "Tên cuộc hội thoại",
+    "nicknames": "Biệt danh",
+    "fileAndMedia": "Tệp và phương tiện",
+    "nicknameCannotEmpty": "Biệt danh không được để trống!",
+    "@nicknameCannotEmpty": {
+      "description": "Cảnh báo khi người dùng thay đổi biệt danh thành rỗng"
+    },
+    "nameCannotEmpty": "Tên không được để trống!",
+    "@nameCannotEmpty": {
+      "description": "Cảnh báo khi người dùng thay đổi tên thành rỗng"
+    },
+    "changeNameToturial": "Để thay đổi tên cuộc hội thoại, vui lòng nhập tên mới và nhấn lưu!",
+    "@changeNameToturial": {
+      "description": "Hướng dẫn khi người dùng đổi tên cuộc hội thoại"
+    },
+    "save": "Lưu",
+    "images": "Ảnh",
+    "videos": "Video",
+    "userInfo": "Thông tin người dùng",
+    "profile": "Hồ sơ",
+    "system": "Hệ thống",
+    "language": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt",
+    "theme": "Chủ đề",
+    "light": "Sáng",
+    "dark": "Tối",
+    "others": "Khác",
+    "signOut": "Đăng xuất",
+    "quitApp": "Thoát ứng dụng",
+    "report": "Báo cáo",
+    "aboutUs": "About us"
+}

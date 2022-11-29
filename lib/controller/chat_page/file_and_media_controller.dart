@@ -16,7 +16,7 @@ class FileAndMediaController extends ChangeNotifier {
   final Chat chat;
 
   /// List of images in Firebase Storage
-  late List<Uint8List?> images;
+  late List<String> images;
 
   /// List of videos in Firebase Storage
   late List<String?> videos;
@@ -40,7 +40,7 @@ class FileAndMediaController extends ChangeNotifier {
         .listAll()
         .then((value) async {
       for (var element in value.items) {
-        images.add(await element.getData());
+        images.add(await element.getDownloadURL());
       }
       finishLoadingImg = true;
       if (finishLoadingVid) {

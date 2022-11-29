@@ -3,6 +3,7 @@ import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePageBottom extends StatefulWidget {
   const HomePageBottom({super.key});
@@ -88,7 +89,7 @@ class _HomePageBottomState extends State<HomePageBottom>
                             ),
                           ),
                           buildText(
-                            text: 'Accepted',
+                            text: AppLocalizations.of(context)!.accepted,
                             fontSize: firstController.value * 12,
                           )
                         ],
@@ -119,7 +120,7 @@ class _HomePageBottomState extends State<HomePageBottom>
                             ),
                           ),
                           buildText(
-                            text: 'Ignored',
+                            text: AppLocalizations.of(context)!.ignored,
                             fontSize: secondController.value * 12,
                           )
                         ],
@@ -151,7 +152,7 @@ class _HomePageBottomState extends State<HomePageBottom>
                             ),
                           ),
                           buildText(
-                            text: 'Blocked',
+                            text: AppLocalizations.of(context)!.blocked,
                             fontSize: thirdController.value * 12,
                           )
                         ],
@@ -182,7 +183,7 @@ class _HomePageBottomState extends State<HomePageBottom>
                         ),
                       ),
                       buildText(
-                        text: 'Waiting',
+                        text: AppLocalizations.of(context)!.waiting,
                         fontSize: fourController.value * 12,
                       )
                     ],

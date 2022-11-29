@@ -5,6 +5,7 @@ import 'package:emdy_chat/util/popup_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MessageItemBottomSheet extends StatelessWidget {
   const MessageItemBottomSheet({super.key, required this.message});
@@ -36,12 +37,13 @@ class MessageItemBottomSheet extends StatelessWidget {
               Clipboard.setData(ClipboardData(text: message.content))
                   .then((value) {
                 Navigator.pop(context);
-                PopupUtil.showSnackBar(context, 'Message content was copied!');
+                PopupUtil.showSnackBar(context,
+                    AppLocalizations.of(context)!.messageContentCopied);
               });
             },
             leading: const Icon(Icons.copy_outlined),
-            title: const AppText(
-              text: 'Copy',
+            title: AppText(
+              text: AppLocalizations.of(context)!.copy,
               style: StyleConfig.contentTextStyle,
             ),
           ),
@@ -55,7 +57,7 @@ class MessageItemBottomSheet extends StatelessWidget {
               color: Colors.red,
             ),
             title: AppText(
-              text: 'Delete',
+              text: AppLocalizations.of(context)!.delete,
               style: StyleConfig.contentTextStyle.copyWith(
                 color: Colors.red,
               ),

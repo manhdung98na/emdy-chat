@@ -20,12 +20,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    print('home page init');
     super.initState();
     controller = HomePageController.instance..initialize();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('home page build');
+
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(

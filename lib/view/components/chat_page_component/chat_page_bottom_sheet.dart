@@ -10,6 +10,7 @@ import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatPageBottomSheet extends StatelessWidget {
   const ChatPageBottomSheet({
@@ -49,8 +50,8 @@ class ChatPageBottomSheet extends StatelessWidget {
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
-              title: const AppText(
-                text: 'Conversation avatar',
+              title: AppText(
+                text: AppLocalizations.of(context)!.conversationAvatar,
                 style: StyleConfig.contentTextStyle,
               ),
             ),
@@ -62,8 +63,8 @@ class ChatPageBottomSheet extends StatelessWidget {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            title: const AppText(
-              text: 'Conversation name',
+            title: AppText(
+              text: AppLocalizations.of(context)!.conversationName,
               style: StyleConfig.contentTextStyle,
             ),
           ),
@@ -75,8 +76,8 @@ class ChatPageBottomSheet extends StatelessWidget {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            title: const AppText(
-              text: 'Nicknames',
+            title: AppText(
+              text: AppLocalizations.of(context)!.nicknames,
               style: StyleConfig.contentTextStyle,
             ),
           ),
@@ -86,8 +87,8 @@ class ChatPageBottomSheet extends StatelessWidget {
             leading: const Icon(
               Icons.perm_media_outlined,
             ),
-            title: const AppText(
-              text: 'File and Media',
+            title: AppText(
+              text: AppLocalizations.of(context)!.fileAndMedia,
               style: StyleConfig.contentTextStyle,
             ),
           ),
@@ -107,8 +108,8 @@ class ChatPageBottomSheet extends StatelessWidget {
               ),
               title: AppText(
                 text: controller.chat.status == ChatStatus.ignored
-                    ? 'Un-Ignore'
-                    : 'Ignore',
+                    ? AppLocalizations.of(context)!.unignored
+                    : AppLocalizations.of(context)!.ignored,
                 style: StyleConfig.contentTextStyle,
               ),
             ),
@@ -127,8 +128,8 @@ class ChatPageBottomSheet extends StatelessWidget {
             ),
             title: AppText(
               text: controller.chat.status == ChatStatus.block
-                  ? 'Unblock'
-                  : 'Block',
+                  ? AppLocalizations.of(context)!.unblock
+                  : AppLocalizations.of(context)!.blocked,
               style: StyleConfig.contentTextStyle,
             ),
           ),
@@ -140,7 +141,7 @@ class ChatPageBottomSheet extends StatelessWidget {
               color: Colors.red,
             ),
             title: AppText(
-              text: 'Delete',
+              text: AppLocalizations.of(context)!.delete,
               style: StyleConfig.contentTextStyle.copyWith(
                 color: Colors.red,
               ),

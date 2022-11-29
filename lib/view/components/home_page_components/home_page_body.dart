@@ -5,6 +5,7 @@ import 'package:emdy_chat/view/components/home_page_components/home_page_chat_it
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
@@ -69,7 +70,7 @@ class HomePageBody extends StatelessWidget {
                 alignment: alignment,
                 curve: Curves.bounceOut,
                 duration: const Duration(milliseconds: 500),
-                child: const Text('No available chat'),
+                child: Text(AppLocalizations.of(context)!.noAvailableChat),
               );
             },
           ),

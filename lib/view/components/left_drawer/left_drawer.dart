@@ -3,18 +3,23 @@ import 'dart:io';
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/configure/style.dart';
+import 'package:emdy_chat/controller/locale_controller.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/components/left_drawer/drawer_avatar.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/rounded_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var localeProvider = Provider.of<LocaleController>(context);
+
     return Drawer(
       backgroundColor: ColorConfig.primaryColor,
       shape: const RoundedRectangleBorder(
@@ -38,31 +43,50 @@ class LeftDrawer extends StatelessWidget {
             height: 30,
             color: Colors.black26,
           ),
-          _buildTitle('User info'),
+          _buildTitle(AppLocalizations.of(context)!.userInfo),
           ListTile(
             onTap: () {},
             leading: const RoundedIcon(
               iconData: Icons.person_pin_rounded,
               color: ColorConfig.purpleColorLogo,
             ),
-            title: const AppText(
-              text: 'Profile',
+            title: AppText(
+              text: AppLocalizations.of(context)!.profile,
               style: StyleConfig.titleTextStyle,
             ),
           ),
-          _buildTitle('System'),
+          _buildTitle(AppLocalizations.of(context)!.system),
           ListTile(
             onTap: () {},
             leading: const RoundedIcon(
               iconData: Icons.contrast_rounded,
               color: Colors.black,
             ),
-            title: const AppText(
-              text: 'Theme : Light',
+            title: AppText(
+              text:
+                  '${AppLocalizations.of(context)!.theme}: ${AppLocalizations.of(context)!.light}',
               style: StyleConfig.titleTextStyle,
             ),
           ),
-          _buildTitle('Others'),
+          ListTile(
+            onTap: () {
+              if (localeProvider.locale?.languageCode == 'vi') {
+                localeProvider.setLocale(const Locale('en'));
+              } else {
+                localeProvider.setLocale(const Locale('vi'));
+              }
+            },
+            leading: const RoundedIcon(
+              iconData: Icons.language,
+              color: Colors.lightBlue,
+            ),
+            title: AppText(
+              text:
+                  '${AppLocalizations.of(context)!.language}: ${localeProvider.getLocaleName(context)}',
+              style: StyleConfig.titleTextStyle,
+            ),
+          ),
+          _buildTitle(AppLocalizations.of(context)!.others),
           ListTile(
             onTap: () {
               FirebaseAuth.instance.signOut();
@@ -71,8 +95,8 @@ class LeftDrawer extends StatelessWidget {
               iconData: Icons.logout,
               color: Colors.blueGrey,
             ),
-            title: const AppText(
-              text: 'Sign out',
+            title: AppText(
+              text: AppLocalizations.of(context)!.signOut,
               style: StyleConfig.titleTextStyle,
             ),
           ),
@@ -84,8 +108,8 @@ class LeftDrawer extends StatelessWidget {
               iconData: Icons.flash_off_sharp,
               color: Colors.brown,
             ),
-            title: const AppText(
-              text: 'Quit app',
+            title: AppText(
+              text: AppLocalizations.of(context)!.quitApp,
               style: StyleConfig.titleTextStyle,
             ),
           ),
@@ -95,8 +119,8 @@ class LeftDrawer extends StatelessWidget {
               iconData: Icons.report_problem_rounded,
               color: Colors.red,
             ),
-            title: const AppText(
-              text: 'Report',
+            title: AppText(
+              text: AppLocalizations.of(context)!.report,
               style: StyleConfig.titleTextStyle,
             ),
           ),
@@ -106,8 +130,8 @@ class LeftDrawer extends StatelessWidget {
               iconData: Icons.info,
               color: Colors.yellow.shade700,
             ),
-            title: const AppText(
-              text: 'About us',
+            title: AppText(
+              text: AppLocalizations.of(context)!.aboutUs,
               style: StyleConfig.titleTextStyle,
             ),
           ),

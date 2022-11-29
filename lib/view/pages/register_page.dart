@@ -11,6 +11,7 @@ import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -55,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 28),
                 alignment: Alignment.centerLeft,
                 child: AppText(
-                  text: 'REGISTER',
+                  text: AppLocalizations.of(context)!.register,
                   style: StyleConfig.headerTextStyle.copyWith(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -76,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           AppTextField(
-                            label: 'Name',
+                            label: AppLocalizations.of(context)!.name,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.name,
                             borderType: BorderType.underline,
@@ -86,19 +87,20 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: SizeConfig.rowSpace),
                           AppTextField(
-                            label: 'Email',
+                            label: AppLocalizations.of(context)!.email,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
                             borderType: BorderType.underline,
                             suffixWidget: const Icon(Icons.email),
                             controller: controller.teEmail,
-                            hint: 'Example: abc@gmail.com',
+                            hint:
+                                '${AppLocalizations.of(context)!.example}: abc@gmail.com',
                             textCapitalization: TextCapitalization.none,
                             validator: StringUtil.validateEmail,
                           ),
                           const SizedBox(height: SizeConfig.rowSpace),
                           AppTextField(
-                            label: 'Password',
+                            label: AppLocalizations.of(context)!.password,
                             textInputAction: TextInputAction.go,
                             obscureText: controller.hidePassword,
                             borderType: BorderType.underline,
@@ -155,8 +157,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
             onPressed: submit,
             icon: const Icon(Icons.login_rounded),
-            label: const AppText(
-                text: 'Sign up', style: StyleConfig.buttonTextStyle),
+            label: AppText(
+              text: AppLocalizations.of(context)!.signUp,
+              style: StyleConfig.buttonTextStyle,
+            ),
           ),
         ),
       );
@@ -166,11 +170,11 @@ class _RegisterPageState extends State<RegisterPage> {
       alignment: Alignment.centerRight,
       child: RichText(
         text: TextSpan(
-          text: 'Already have an account? ',
+          text: '${AppLocalizations.of(context)!.alreadyHaveAccount} ',
           style: StyleConfig.contentTextStyle,
           children: [
             TextSpan(
-              text: 'Login now',
+              text: AppLocalizations.of(context)!.loginNow,
               recognizer: TapGestureRecognizer()
                 ..onTap = () => Navigator.pop(context),
               style: const TextStyle(
@@ -194,19 +198,19 @@ class _RegisterPageState extends State<RegisterPage> {
     Color color;
     switch (health) {
       case PasswordHeath.weak:
-        text = 'Password is weak!';
+        text = AppLocalizations.of(context)!.weakPassword;
         color = Colors.yellow;
         break;
       case PasswordHeath.good:
-        text = 'Password is good!';
+        text = AppLocalizations.of(context)!.goodPassword;
         color = ColorConfig.hintTextColor;
         break;
       case PasswordHeath.strong:
-        text = 'Password is strong!';
+        text = AppLocalizations.of(context)!.strongPassword;
         color = Colors.green;
         break;
       default:
-        text = 'Password must have at least 6 characters';
+        text = AppLocalizations.of(context)!.passwordMinLength;
         color = Colors.red;
     }
     return AppText(
