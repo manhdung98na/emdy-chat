@@ -1,5 +1,4 @@
 import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/modal/chat.dart';
 import 'package:emdy_chat/modal/message.dart';
@@ -22,7 +21,7 @@ class TextMessageItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        gradient: backgroundColor,
+        gradient: getBackgroundColor(context),
         borderRadius: borderRadius,
         boxShadow: const [
           BoxShadow(color: Colors.black45, blurRadius: 1.25),
@@ -30,7 +29,10 @@ class TextMessageItem extends StatelessWidget {
       ),
       child: AppText(
         text: message.content!,
-        style: StyleConfig.contentTextStyle.copyWith(color: textColor),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: getTextColor(context)),
         textOverflow: TextOverflow.clip,
         maxLines: null,
       ),
@@ -41,11 +43,11 @@ class TextMessageItem extends StatelessWidget {
       ? Alignment.centerRight
       : Alignment.centerLeft;
 
-  LinearGradient get backgroundColor => LinearGradient(
+  LinearGradient getBackgroundColor(BuildContext context) => LinearGradient(
         colors: message.senderId == UserManager.uid
             ? [
-                ColorConfig.purpleColorLogo,
-                ColorConfig.navyColorLogo,
+                Theme.of(context).indicatorColor,
+                Theme.of(context).focusColor,
               ]
             : [
                 const Color.fromARGB(255, 196, 182, 231),
@@ -55,9 +57,10 @@ class TextMessageItem extends StatelessWidget {
         end: Alignment.bottomRight,
       );
 
-  Color get textColor => message.senderId == UserManager.uid
-      ? ColorConfig.primaryColor
-      : ColorConfig.navyColorLogo;
+  Color getTextColor(BuildContext context) =>
+      message.senderId == UserManager.uid
+          ? Theme.of(context).primaryColor
+          : ColorConfig.navyColorLogo;
 
   BorderRadius get borderRadius => message.senderId == UserManager.uid
       ? const BorderRadius.only(

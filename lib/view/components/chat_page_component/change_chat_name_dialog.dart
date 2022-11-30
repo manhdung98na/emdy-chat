@@ -1,5 +1,4 @@
 import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/util/constant.dart';
 import 'package:emdy_chat/util/popup_util.dart';
@@ -34,7 +33,7 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: ColorConfig.primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       child: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -43,14 +42,14 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
           children: [
             AppText(
               text: AppLocalizations.of(context)!.conversationName,
-              style: StyleConfig.headerTextStyle.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             AppText(
               text: AppLocalizations.of(context)!.changeNameToturial,
               maxLines: 2,
-              style: StyleConfig.hintTextStyle,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 8),
             if (isLoading)
@@ -72,9 +71,9 @@ class _ChangeChatNameDialogState extends State<ChangeChatNameDialog> {
                 },
                 suffixWidget: IconButton(
                   onPressed: updateName,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.save,
-                    color: ColorConfig.purpleColorLogo,
+                    color: Theme.of(context).indicatorColor,
                     size: 32,
                   ),
                 ),

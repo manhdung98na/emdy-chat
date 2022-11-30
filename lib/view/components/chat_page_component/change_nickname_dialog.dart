@@ -1,5 +1,4 @@
 import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/change_nickname_controller.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
@@ -9,8 +8,8 @@ import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class ChangeNicknameDialog extends StatelessWidget {
   const ChangeNicknameDialog({super.key, required this.controller});
@@ -20,7 +19,7 @@ class ChangeNicknameDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: ColorConfig.primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       child: ChangeNotifierProvider(
         create: (context) => ChangeNicknameController(controller),
         child: Container(
@@ -35,9 +34,10 @@ class ChangeNicknameDialog extends StatelessWidget {
                   children: [
                     AppText(
                       text: AppLocalizations.of(context)!.nicknames,
-                      style: StyleConfig.headerTextStyle.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     if (controller.isLoading)
@@ -53,7 +53,7 @@ class ChangeNicknameDialog extends StatelessWidget {
                       buildCounter: () => AppText(
                         text: UserManager.currentUser?.fullName ??
                             AppLocalizations.of(context)!.you,
-                        style: StyleConfig.hintTextStyle,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
@@ -72,7 +72,7 @@ class ChangeNicknameDialog extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 15),
                       buildCounter: () => AppText(
                         text: controller.theOpposite?.fullName ?? '',
-                        style: StyleConfig.hintTextStyle,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
@@ -95,11 +95,12 @@ class ChangeNicknameDialog extends StatelessWidget {
                           });
                         },
                         icon: const Icon(Icons.save),
-                        label: Text(
-                          AppLocalizations.of(context)!.save,
-                          style: StyleConfig.contentTextStyle.copyWith(
-                            color: ColorConfig.primaryColor,
-                          ),
+                        label: AppText(
+                          text: AppLocalizations.of(context)!.save,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Theme.of(context).primaryColor),
                         ),
                       ),
                     )

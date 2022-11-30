@@ -1,11 +1,10 @@
-import 'package:emdy_chat/configure/style.dart';
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
   const AppText({
     super.key,
     required this.text,
-    this.style = StyleConfig.contentTextStyle,
+    this.style,
     this.maxLines = 1,
     this.textOverflow = TextOverflow.ellipsis,
     this.textAlign = TextAlign.left,
@@ -16,10 +15,8 @@ class AppText extends StatelessWidget {
   ///Can not be null.
   final String text;
 
-  ///Style of [text]. This can not be null
-  ///
-  ///Default is [StyleConfig.contentTextStyle]
-  final TextStyle style;
+  ///Style of [text]. Default is [TextTheme.bodySmall]
+  final TextStyle? style;
 
   ///The maximum lines to display [text]. Default is 1
   final int? maxLines;
@@ -34,7 +31,7 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: style,
+      style: style ?? Theme.of(context).textTheme.bodyMedium,
       maxLines: maxLines,
       overflow: textOverflow,
       textAlign: textAlign,

@@ -1,7 +1,6 @@
 import 'package:emdy_chat/configure/assets.dart';
 import 'package:emdy_chat/configure/route.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/modal/chat.dart';
@@ -33,12 +32,12 @@ class HomePageChatItem extends StatelessWidget {
       ),
       title: AppText(
         text: chat.name,
-        style: StyleConfig.contentTextStyle.copyWith(fontSize: 16),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16),
         textOverflow: TextOverflow.ellipsis,
       ),
       subtitle: AppText(
         text: '${getName(context)} ${chat.recentAction}',
-        style: StyleConfig.hintTextStyle,
+        style: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }

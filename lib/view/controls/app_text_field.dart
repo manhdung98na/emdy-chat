@@ -1,6 +1,4 @@
-import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/util/type_util.dart';
 import 'package:flutter/material.dart';
 
@@ -141,18 +139,18 @@ class AppTextField extends StatelessWidget {
         contentPadding:
             padding ?? const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
         // contentPadding: padding,
-        fillColor: ColorConfig.primaryColor,
+        fillColor: Theme.of(context).primaryColor,
         filled: false,
-        hoverColor: ColorConfig.secondaryColor,
+        // hoverColor: ColorConfig.secondaryColor,
         labelText: label,
         hintText: hint,
-        hintStyle: hintStyle ?? StyleConfig.hintTextStyle,
+        hintStyle: hintStyle ?? Theme.of(context).textTheme.bodySmall,
         alignLabelWithHint: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
         prefixIcon: borderType == BorderType.underline ? null : prefixWidget,
         suffixIcon: suffixWidget,
-        border: border,
-        enabledBorder: border,
+        border: buildBorder(context),
+        enabledBorder: buildBorder(context),
         constraints: boxConstraints,
       ),
       buildCounter: (context,
@@ -161,25 +159,28 @@ class AppTextField extends StatelessWidget {
     );
   }
 
-  InputBorder get border {
+  InputBorder buildBorder(BuildContext context) {
     switch (borderType) {
       case BorderType.none:
         return InputBorder.none;
       case BorderType.underline:
-        return underlineBorder;
+        return buildUnderlineBorder(context);
       default:
-        return outlineBorder;
+        return buildOutlineBorder(context);
     }
   }
 
-  OutlineInputBorder get outlineBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: ColorConfig.navyColorLogo),
+  OutlineInputBorder buildOutlineBorder(BuildContext context) =>
+      OutlineInputBorder(
+        borderSide: BorderSide(color: Theme.of(context).indicatorColor),
         borderRadius:
             BorderRadius.circular(borderRadius ?? SizeConfig.borderRadius),
         gapPadding: 6,
       );
 
-  UnderlineInputBorder get underlineBorder => const UnderlineInputBorder(
-        borderSide: BorderSide(color: ColorConfig.navyColorLogo, width: 0.5),
+  UnderlineInputBorder buildUnderlineBorder(BuildContext context) =>
+      UnderlineInputBorder(
+        borderSide:
+            BorderSide(color: Theme.of(context).indicatorColor, width: 0.5),
       );
 }

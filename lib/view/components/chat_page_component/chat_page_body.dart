@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/manager/file_manager.dart';
 import 'package:emdy_chat/util/constant.dart';
@@ -10,8 +9,8 @@ import 'package:emdy_chat/view/components/chat_page_component/message_item/messa
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class ChatPageBody extends StatelessWidget {
   const ChatPageBody({super.key, required this.controller});
@@ -55,14 +54,14 @@ class ChatPageBody extends StatelessWidget {
       children: [
         IconButton(
           splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           onPressed: () {},
           iconSize: 30,
           icon: const Icon(Icons.camera_alt_rounded),
         ),
         IconButton(
           splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           iconSize: 30,
           onPressed: () => pickImageAndSend(context),
           icon: const Icon(Icons.photo_rounded),
@@ -85,7 +84,7 @@ class ChatPageBody extends StatelessWidget {
         ),
         IconButton(
           splashRadius: 1,
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           iconSize: 30,
           onPressed: () {
             sendMessage(context, message: likeCharacter);

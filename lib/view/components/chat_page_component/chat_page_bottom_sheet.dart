@@ -1,5 +1,3 @@
-import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/util/popup_util.dart';
 import 'package:emdy_chat/util/type_util.dart';
@@ -25,9 +23,9 @@ class ChatPageBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-        color: ColorConfig.primaryColor,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+        color: Theme.of(context).primaryColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -37,7 +35,7 @@ class ChatPageBottomSheet extends StatelessWidget {
             width: 80,
             height: 6,
             decoration: BoxDecoration(
-              color: Colors.black54,
+              color: Theme.of(context).dividerColor,
               borderRadius: BorderRadius.circular(6),
             ),
           ),
@@ -52,7 +50,7 @@ class ChatPageBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               title: AppText(
                 text: AppLocalizations.of(context)!.conversationAvatar,
-                style: StyleConfig.contentTextStyle,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           // Conversation name
@@ -65,7 +63,7 @@ class ChatPageBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             title: AppText(
               text: AppLocalizations.of(context)!.conversationName,
-              style: StyleConfig.contentTextStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           // Nicknames
@@ -78,7 +76,7 @@ class ChatPageBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             title: AppText(
               text: AppLocalizations.of(context)!.nicknames,
-              style: StyleConfig.contentTextStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           // File and Media
@@ -89,7 +87,7 @@ class ChatPageBottomSheet extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.fileAndMedia,
-              style: StyleConfig.contentTextStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           // Ignore
@@ -110,7 +108,7 @@ class ChatPageBottomSheet extends StatelessWidget {
                 text: controller.chat.status == ChatStatus.ignored
                     ? AppLocalizations.of(context)!.unignored
                     : AppLocalizations.of(context)!.ignored,
-                style: StyleConfig.contentTextStyle,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           // Block
@@ -130,7 +128,7 @@ class ChatPageBottomSheet extends StatelessWidget {
               text: controller.chat.status == ChatStatus.block
                   ? AppLocalizations.of(context)!.unblock
                   : AppLocalizations.of(context)!.blocked,
-              style: StyleConfig.contentTextStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           // Delete
@@ -142,9 +140,10 @@ class ChatPageBottomSheet extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.delete,
-              style: StyleConfig.contentTextStyle.copyWith(
-                color: Colors.red,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.red),
             ),
           ),
         ],

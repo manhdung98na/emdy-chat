@@ -1,7 +1,6 @@
 import 'package:emdy_chat/configure/assets.dart';
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/chat_page_controller.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
 import 'package:emdy_chat/modal/chat.dart';
@@ -87,7 +86,9 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: AppText(
               text: controller.chat.name,
-              style: StyleConfig.titleTextStyle
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
@@ -98,14 +99,14 @@ class _ChatPageState extends State<ChatPage> {
           padding: EdgeInsets.zero,
           splashRadius: 1,
           onPressed: () {},
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           icon: const Icon(Icons.call),
         ),
         IconButton(
           padding: EdgeInsets.zero,
           splashRadius: 1,
           onPressed: () {},
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           icon: const Icon(Icons.video_call),
         ),
         IconButton(
@@ -117,7 +118,7 @@ class _ChatPageState extends State<ChatPage> {
                 ChatPageBottomSheet(
                     controller: controller, chatPageContext: context));
           },
-          color: ColorConfig.purpleColorLogo,
+          color: Theme.of(context).indicatorColor,
           icon: const Icon(Icons.info_rounded),
         ),
       ],

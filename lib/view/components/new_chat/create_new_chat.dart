@@ -1,6 +1,4 @@
 import 'package:emdy_chat/configure/app_manager.dart';
-import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/new_chat_controller.dart';
 import 'package:emdy_chat/util/type_util.dart';
 import 'package:emdy_chat/view/components/chat_page_component/chat_page_body.dart';
@@ -9,8 +7,8 @@ import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class NewChat extends StatelessWidget {
   const NewChat({super.key});
@@ -19,7 +17,7 @@ class NewChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buidlAppBar(context),
-      backgroundColor: ColorConfig.primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       body: ChangeNotifierProvider(
         create: (context) => NewChatController(),
         child: Consumer<NewChatController>(
@@ -44,12 +42,12 @@ class NewChat extends StatelessWidget {
   }
 
   AppBar buidlAppBar(BuildContext context) => AppBar(
-        backgroundColor: ColorConfig.primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Hero(
           tag: "CreateNewChat",
           child: AppText(
             text: AppLocalizations.of(context)!.newMessage,
-            style: StyleConfig.titleTextStyle,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
       );
@@ -58,7 +56,7 @@ class NewChat extends StatelessWidget {
     return PhysicalModel(
       elevation: 4,
       shadowColor: Colors.black54,
-      color: ColorConfig.primaryColor,
+      color: Theme.of(context).primaryColor,
       child: Row(
         children: [
           Container(

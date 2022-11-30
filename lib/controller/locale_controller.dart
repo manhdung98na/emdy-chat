@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocaleController extends ChangeNotifier {
-  LocaleController();
-
-  late BuildContext context;
+  static const String defaultLocaleCode = 'vi';
 
   Locale? _locale;
 
   Locale? get locale => _locale;
 
   String getLocaleName(context) {
-    switch (_locale?.languageCode ?? 'en') {
+    switch (_locale?.languageCode ?? 'vi') {
       case 'vi':
         return AppLocalizations.of(context)!.vietnamese;
       default:
@@ -19,11 +17,11 @@ class LocaleController extends ChangeNotifier {
     }
   }
 
-  void setLocale(Locale locale) {
-    if (!AppLocalizations.supportedLocales.contains(locale)) {
+  void setLocale(Locale newLocale) {
+    if (!AppLocalizations.supportedLocales.contains(newLocale)) {
       return;
     }
-    _locale = locale;
+    _locale = newLocale;
     notifyListeners();
   }
 }

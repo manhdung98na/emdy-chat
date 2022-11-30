@@ -1,6 +1,5 @@
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/register_controller.dart';
 import 'package:emdy_chat/util/constant.dart';
 import 'package:emdy_chat/util/popup_util.dart';
@@ -10,8 +9,8 @@ import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -34,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     var viewInsets = MediaQuery.of(context).viewInsets;
 
     return Scaffold(
-      backgroundColor: ColorConfig.primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
@@ -57,11 +56,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 alignment: Alignment.centerLeft,
                 child: AppText(
                   text: AppLocalizations.of(context)!.register,
-                  style: StyleConfig.headerTextStyle.copyWith(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: ColorConfig.purpleColorLogo,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).indicatorColor,
+                      ),
                 ),
               ),
               //input form
@@ -159,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
             icon: const Icon(Icons.login_rounded),
             label: AppText(
               text: AppLocalizations.of(context)!.signUp,
-              style: StyleConfig.buttonTextStyle,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
         ),
@@ -171,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: RichText(
         text: TextSpan(
           text: '${AppLocalizations.of(context)!.alreadyHaveAccount} ',
-          style: StyleConfig.contentTextStyle,
+          style: Theme.of(context).textTheme.bodyMedium,
           children: [
             TextSpan(
               text: AppLocalizations.of(context)!.loginNow,
@@ -203,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
         break;
       case PasswordHeath.good:
         text = AppLocalizations.of(context)!.goodPassword;
-        color = ColorConfig.hintTextColor;
+        color = Theme.of(context).hintColor;
         break;
       case PasswordHeath.strong:
         text = AppLocalizations.of(context)!.strongPassword;
@@ -214,7 +213,8 @@ class _RegisterPageState extends State<RegisterPage> {
         color = Colors.red;
     }
     return AppText(
-        text: text, style: StyleConfig.hintTextStyle.copyWith(color: color));
+        text: text,
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: color));
   }
 
   void submit() async {

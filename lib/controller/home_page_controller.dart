@@ -67,7 +67,10 @@ class HomePageController extends ChangeNotifier {
                 .ref('${FirebaseManager.usersStorage}/${temp.theOppositeId}')
                 .getData()
                 .then((value) => value)
-                .onError((error, stackTrace) => null);
+                .onError((error, stackTrace) {
+              print(error);
+              return null;
+            });
           }
         }
         chats.sort((a, b) {

@@ -1,6 +1,5 @@
 import 'package:emdy_chat/configure/assets.dart';
 import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/new_chat_controller.dart';
 import 'package:emdy_chat/modal/user.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
@@ -19,7 +18,7 @@ class FoundUserList extends StatelessWidget {
       itemCount: list.length + 1,
       itemBuilder: (context, index) {
         if (index == list.length) {
-          return buildLoadMoreWidget();
+          return buildLoadMoreWidget(context);
         }
 
         User user = list[index];
@@ -39,11 +38,11 @@ class FoundUserList extends StatelessWidget {
           ),
           title: AppText(
             text: user.fullName,
-            style: StyleConfig.titleTextStyle,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           subtitle: AppText(
             text: '@${user.userId}',
-            style: StyleConfig.hintTextStyle,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         );
       },
@@ -58,13 +57,13 @@ class FoundUserList extends StatelessWidget {
     }
   }
 
-  Widget buildLoadMoreWidget() {
+  Widget buildLoadMoreWidget(BuildContext context) {
     if (controller.lastUserSnapshot == null) {
       return const SizedBox();
     }
     return Center(
       child: Material(
-        color: ColorConfig.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(20),
         elevation: 2,
         shadowColor: ColorConfig.secondaryColor,

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/locale_controller.dart';
+import 'package:emdy_chat/controller/theme_controller.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/components/left_drawer/drawer_avatar.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
@@ -18,10 +18,11 @@ class LeftDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var localeProvider = Provider.of<LocaleController>(context);
+    var localeProvider = Provider.of<LocaleController>(context, listen: false);
+    var themeProvider = Provider.of<ThemeController>(context, listen: false);
 
     return Drawer(
-      backgroundColor: ColorConfig.primaryColor,
+      // backgroundColor: Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(right: Radius.circular(25)),
       ),
@@ -35,15 +36,15 @@ class LeftDrawer extends StatelessWidget {
             text: UserManager.currentUser!.fullName,
             textAlign: TextAlign.center,
             maxLines: 2,
-            style: StyleConfig.titleTextStyle.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const Divider(
             height: 30,
             color: Colors.black26,
           ),
-          _buildTitle(AppLocalizations.of(context)!.userInfo),
+          _buildTitle(context, AppLocalizations.of(context)!.userInfo),
           ListTile(
             onTap: () {},
             leading: const RoundedIcon(
@@ -52,25 +53,29 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.profile,
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
-          _buildTitle(AppLocalizations.of(context)!.system),
+          _buildTitle(context, AppLocalizations.of(context)!.system),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              themeProvider.toggleTheme();
+            },
             leading: const RoundedIcon(
               iconData: Icons.contrast_rounded,
               color: Colors.black,
             ),
             title: AppText(
               text:
-                  '${AppLocalizations.of(context)!.theme}: ${AppLocalizations.of(context)!.light}',
-              style: StyleConfig.titleTextStyle,
+                  '${AppLocalizations.of(context)!.theme}: ${themeProvider.getThemeName(context)}',
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
           ListTile(
             onTap: () {
-              if (localeProvider.locale?.languageCode == 'vi') {
+              if ((localeProvider.locale?.languageCode ??
+                      LocaleController.defaultLocaleCode) ==
+                  'vi') {
                 localeProvider.setLocale(const Locale('en'));
               } else {
                 localeProvider.setLocale(const Locale('vi'));
@@ -83,10 +88,10 @@ class LeftDrawer extends StatelessWidget {
             title: AppText(
               text:
                   '${AppLocalizations.of(context)!.language}: ${localeProvider.getLocaleName(context)}',
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
-          _buildTitle(AppLocalizations.of(context)!.others),
+          _buildTitle(context, AppLocalizations.of(context)!.others),
           ListTile(
             onTap: () {
               FirebaseAuth.instance.signOut();
@@ -97,7 +102,7 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.signOut,
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
           ListTile(
@@ -110,7 +115,7 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.quitApp,
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
           ListTile(
@@ -121,7 +126,7 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.report,
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
           ListTile(
@@ -132,7 +137,7 @@ class LeftDrawer extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.aboutUs,
-              style: StyleConfig.titleTextStyle,
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
           ),
         ],
@@ -140,12 +145,14 @@ class LeftDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle(String title) {
+  Widget _buildTitle(BuildContext context, String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: AppText(
         text: title,
-        style: StyleConfig.hintTextStyle
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall!
             .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
       ),
     );

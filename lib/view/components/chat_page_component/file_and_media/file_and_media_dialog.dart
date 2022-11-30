@@ -1,10 +1,10 @@
 import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/chat_page/file_and_media_controller.dart';
 import 'package:emdy_chat/modal/chat.dart';
 import 'package:emdy_chat/view/components/chat_page_component/file_and_media/chat_images.dart';
 import 'package:emdy_chat/view/components/chat_page_component/file_and_media/chat_videos.dart';
+import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/inprogress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -61,9 +61,9 @@ class _FileAndMediaDialogState extends State<FileAndMediaDialog> {
   AppBar buildAppBar() {
     return AppBar(
       elevation: SizeConfig.elevation,
-      title: Text(
-        AppLocalizations.of(context)!.fileAndMedia,
-        style: StyleConfig.titleTextStyle,
+      title: AppText(
+        text: AppLocalizations.of(context)!.fileAndMedia,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

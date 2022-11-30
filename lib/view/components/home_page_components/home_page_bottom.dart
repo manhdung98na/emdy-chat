@@ -1,5 +1,4 @@
 import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
@@ -45,16 +44,17 @@ class _HomePageBottomState extends State<HomePageBottom>
       duration: const Duration(milliseconds: 180),
     );
     first =
-        ColorTween(begin: Colors.transparent, end: ColorConfig.navyColorLogo)
+        ColorTween(begin: Colors.transparent, end: ColorConfig.purpleColorLogo)
             .animate(firstController);
     second =
-        ColorTween(begin: Colors.transparent, end: ColorConfig.navyColorLogo)
+        ColorTween(begin: Colors.transparent, end: ColorConfig.purpleColorLogo)
             .animate(secondController);
     third =
-        ColorTween(begin: Colors.transparent, end: ColorConfig.navyColorLogo)
+        ColorTween(begin: Colors.transparent, end: ColorConfig.purpleColorLogo)
             .animate(thirdController);
-    four = ColorTween(begin: Colors.transparent, end: ColorConfig.navyColorLogo)
-        .animate(fourController);
+    four =
+        ColorTween(begin: Colors.transparent, end: ColorConfig.purpleColorLogo)
+            .animate(fourController);
   }
 
   @override
@@ -218,10 +218,8 @@ class _HomePageBottomState extends State<HomePageBottom>
       text: text,
       textAlign: TextAlign.center,
       maxLines: 1,
-      style: StyleConfig.contentTextStyle.copyWith(
-        fontSize: fontSize,
-        color: ColorConfig.navyColorLogo,
-      ),
+      style:
+          Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: fontSize),
     );
   }
 

@@ -1,11 +1,10 @@
 import 'package:emdy_chat/configure/size.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/user_avatar_controller.dart';
 import 'package:emdy_chat/manager/user_manager.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomePageAppBar extends StatefulWidget with PreferredSizeWidget {
   const HomePageAppBar({super.key});
@@ -42,16 +41,16 @@ class HomePageAppBarState extends State<HomePageAppBar> {
       ),
       title: AppText(
         text: AppLocalizations.of(context)!.message,
-        style: StyleConfig.headerTextStyle,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
       actions: [
         ElevatedButton(
           onPressed: () {},
           style: appBarButtonStyle,
-          child: const Icon(
+          child: Icon(
             Icons.photo_camera,
-            color: Colors.black,
             size: 18,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ],
@@ -62,7 +61,8 @@ class HomePageAppBarState extends State<HomePageAppBar> {
         elevation: MaterialStateProperty.all(0),
         padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
         shape: MaterialStateProperty.all(const CircleBorder()),
-        backgroundColor: MaterialStateProperty.all(Colors.black12),
+        backgroundColor: MaterialStateProperty.all(
+            Theme.of(context).hintColor.withOpacity(0.2)),
         maximumSize: MaterialStateProperty.all(const Size(35, 35)),
         minimumSize: MaterialStateProperty.all(const Size(35, 35)),
         alignment: Alignment.center,

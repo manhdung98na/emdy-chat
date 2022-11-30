@@ -46,34 +46,32 @@ class InprogressWidgetState extends State<InprogressWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      child: Center(
-        child: Container(
-          width: widget.size,
-          height: widget.size,
+    return Center(
+      child: Container(
+        width: widget.size,
+        height: widget.size,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: ColorConfig.primaryColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              AnimatedBuilder(
-                animation: firstAnimation,
-                builder: (context, child) => CustomPaint(
-                  painter: LoadingPainter(
-                      firstAnimation.value, secondAnimation.value),
-                  size: Size(widget.size * 0.6, widget.size * 0.6),
-                ),
+          children: [
+            AnimatedBuilder(
+              animation: firstAnimation,
+              builder: (context, child) => CustomPaint(
+                painter: LoadingPainter(
+                    firstAnimation.value, secondAnimation.value, context),
+                size: Size(widget.size * 0.6, widget.size * 0.6),
               ),
-              Image.asset(
-                AssetsConfig.logo,
-                height: widget.size * 0.27,
-                width: widget.size * 0.27,
-              )
-            ],
-          ),
+            ),
+            Image.asset(
+              AssetsConfig.logo,
+              height: widget.size * 0.27,
+              width: widget.size * 0.27,
+            )
+          ],
         ),
       ),
     );
@@ -81,15 +79,16 @@ class InprogressWidgetState extends State<InprogressWidget>
 }
 
 class LoadingPainter extends CustomPainter {
-  const LoadingPainter(this.firstAngle, this.secondAngle);
+  const LoadingPainter(this.firstAngle, this.secondAngle, this.context);
 
   final double firstAngle;
   final double secondAngle;
+  final BuildContext context;
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint firstArc = Paint()
-      ..color = ColorConfig.navyColorLogo
+      ..color = Theme.of(context).indicatorColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.064
       ..strokeCap = StrokeCap.round;

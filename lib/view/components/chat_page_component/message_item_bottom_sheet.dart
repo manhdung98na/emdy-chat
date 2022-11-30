@@ -1,5 +1,3 @@
-import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/modal/message.dart';
 import 'package:emdy_chat/util/popup_util.dart';
 import 'package:emdy_chat/view/controls/app_text.dart';
@@ -15,9 +13,9 @@ class MessageItemBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-        color: ColorConfig.primaryColor,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+        color: Theme.of(context).primaryColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -44,7 +42,7 @@ class MessageItemBottomSheet extends StatelessWidget {
             leading: const Icon(Icons.copy_outlined),
             title: AppText(
               text: AppLocalizations.of(context)!.copy,
-              style: StyleConfig.contentTextStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           // Delete
@@ -58,9 +56,9 @@ class MessageItemBottomSheet extends StatelessWidget {
             ),
             title: AppText(
               text: AppLocalizations.of(context)!.delete,
-              style: StyleConfig.contentTextStyle.copyWith(
-                color: Colors.red,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Colors.red,
+                  ),
             ),
           ),
         ],

@@ -1,11 +1,10 @@
-import 'package:emdy_chat/configure/color.dart';
-import 'package:emdy_chat/configure/style.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
 import 'package:emdy_chat/view/components/home_page_components/home_page_chat_item.dart';
+import 'package:emdy_chat/view/controls/app_text.dart';
 import 'package:emdy_chat/view/controls/app_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
@@ -22,7 +21,7 @@ class HomePageBody extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                searchWidget,
+                buildSearchWidget(context),
                 ...buildList(),
               ],
             );
@@ -32,7 +31,7 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
-  Widget get searchWidget {
+  Widget buildSearchWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: AppTextField(
@@ -40,12 +39,12 @@ class HomePageBody extends StatelessWidget {
         keyboardType: TextInputType.text,
         borderRadius: 30,
         hint: 'Search chats here',
-        hintStyle: StyleConfig.contentTextStyle.copyWith(
-          color: ColorConfig.hintTextColor,
-        ),
-        prefixWidget: const Icon(
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).textTheme.headlineSmall!.color,
+            ),
+        prefixWidget: Icon(
           Icons.search,
-          color: ColorConfig.hintTextColor,
+          color: Theme.of(context).textTheme.bodySmall!.color,
         ),
         onChange: (value) {},
       ),
@@ -70,7 +69,8 @@ class HomePageBody extends StatelessWidget {
                 alignment: alignment,
                 curve: Curves.bounceOut,
                 duration: const Duration(milliseconds: 500),
-                child: Text(AppLocalizations.of(context)!.noAvailableChat),
+                child: AppText(
+                    text: AppLocalizations.of(context)!.noAvailableChat),
               );
             },
           ),

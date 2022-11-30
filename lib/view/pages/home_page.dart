@@ -1,3 +1,4 @@
+import 'package:emdy_chat/configure/color.dart';
 import 'package:emdy_chat/configure/route.dart';
 import 'package:emdy_chat/configure/size.dart';
 import 'package:emdy_chat/controller/home_page_controller.dart';
@@ -20,15 +21,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    print('home page init');
     super.initState();
     controller = HomePageController.instance..initialize();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('home page build');
-
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -44,13 +42,14 @@ class _HomePageState extends State<HomePage> {
 
   FloatingActionButton get floatingActionButton {
     return FloatingActionButton(
+      backgroundColor: ColorConfig.purpleColorLogo,
       heroTag: "CreateNewChat",
       elevation: SizeConfig.elevation,
       shape: const CircleBorder(),
       onPressed: () {
         RouteConfig.pushWidget(context, const NewChat());
       },
-      child: const Icon(Icons.add),
+      child: const Icon(Icons.add, color: Colors.white),
     );
   }
 
